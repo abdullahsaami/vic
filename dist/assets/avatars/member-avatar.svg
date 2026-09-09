@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#1E232F" />
+      <stop offset="100%" stop-color="#0B0D13" />
+    </radialGradient>
+    <linearGradient id="goldGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D4AF37" />
+    </linearGradient>
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F6C8A4" />
+      <stop offset="100%" stop-color="#E2A67B" />
+    </linearGradient>
+    <linearGradient id="hairGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2D3139" />
+      <stop offset="100%" stop-color="#181A20" />
+    </linearGradient>
+    <linearGradient id="jacketGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="100" fill="url(#bgGrad)" />
+
+  <!-- Subtle Inner Ring Accent -->
+  <circle cx="100" cy="100" r="97" fill="none" stroke="url(#goldGlow)" stroke-width="2" opacity="0.4" />
+
+  <!-- Torso / Jacket -->
+  <path d="M40 200 C40 155 70 142 100 142 C130 142 160 155 160 200 Z" fill="url(#jacketGrad)" />
+  
+  <!-- Collar / Shirt -->
+  <path d="M78 142 L100 174 L122 142 Z" fill="#0A0F1D" />
+  <path d="M85 142 L100 162 L115 142 Z" fill="#FFFFFF" opacity="0.9" />
+
+  <!-- Lapel Pin -->
+  <circle cx="68" cy="170" r="4" fill="url(#goldGlow)" />
+  <path d="M68 167 L70 170 L68 173 L66 170 Z" fill="#000" />
+
+  <!-- Neck -->
+  <rect x="88" y="115" width="24" height="30" rx="6" fill="url(#skinGrad)" />
+
+  <!-- Head Base -->
+  <ellipse cx="100" cy="92" rx="36" ry="42" fill="url(#skinGrad)" />
+
+  <!-- Ears -->
+  <circle cx="64" cy="94" r="8" fill="#E2A67B" />
+  <circle cx="136" cy="94" r="8" fill="#E2A67B" />
+
+  <!-- Hair -->
+  <path d="M64 85 C64 55 80 44 100 44 C120 44 136 55 136 85 C136 85 130 68 100 68 C70 68 64 85 64 85 Z" fill="url(#hairGrad)" />
+  <path d="M64 80 C60 62 75 42 100 42 C125 42 140 60 136 78 C128 65 118 60 102 60 C85 60 72 68 64 80 Z" fill="#2D3139" />
+
+  <!-- Eyebrows -->
+  <path d="M78 81 Q86 78 94 81" stroke="#2B2D33" stroke-width="3" stroke-linecap="round" fill="none" />
+  <path d="M106 81 Q114 78 122 81" stroke="#2B2D33" stroke-width="3" stroke-linecap="round" fill="none" />
+
+  <!-- Eyes -->
+  <ellipse cx="86" cy="89" rx="4" ry="4.5" fill="#1C1D21" />
+  <circle cx="87.5" cy="87.5" r="1.5" fill="#FFFFFF" />
+
+  <ellipse cx="114" cy="89" rx="4" ry="4.5" fill="#1C1D21" />
+  <circle cx="115.5" cy="87.5" r="1.5" fill="#FFFFFF" />
+
+  <!-- Glasses -->
+  <rect x="74" y="80" width="22" height="17" rx="5" fill="none" stroke="#D4AF37" stroke-width="2.2" opacity="0.85" />
+  <rect x="104" y="80" width="22" height="17" rx="5" fill="none" stroke="#D4AF37" stroke-width="2.2" opacity="0.85" />
+  <line x1="96" y1="88" x2="104" y2="88" stroke="#D4AF37" stroke-width="2.2" opacity="0.85" />
+
+  <!-- Nose -->
+  <path d="M99 92 L97 101 L103 101" stroke="#C98B62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+
+  <!-- Warm Smile -->
+  <path d="M90 111 Q100 118 110 111" stroke="#8E4830" stroke-width="2.8" stroke-linecap="round" fill="none" />
+</svg>

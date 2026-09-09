@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-[#FAFAFA] text-gray-900 dark:bg-[#070709] dark:text-neutral-100 transition-colors duration-200;
+  }
+  
+  ::selection {
+    @apply bg-volt-gold/30 text-volt-yellow dark:bg-volt-gold/40 dark:text-volt-light;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-volt-gold focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-amber-500 via-volt-gold to-yellow-400 text-black font-bold hover:brightness-110 shadow-lg shadow-amber-500/20 active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-onyx-800 dark:hover:bg-onyx-700 border border-neutral-700/60 dark:border-neutral-700 active:scale-95;
+  }
+
+  .btn-outline {
+    @apply border-2 border-volt-gold/80 text-neutral-800 dark:text-volt-gold hover:bg-volt-gold/10 active:scale-95;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-[#001428] font-bold hover:bg-accent-light shadow-lg shadow-accent/20 active:scale-95;
+  }
+
+  .card {
+    @apply bg-white dark:bg-onyx-900/90 border border-neutral-200/80 dark:border-neutral-800/80 rounded-2xl shadow-lg shadow-black/5 dark:shadow-black/40 backdrop-blur-md transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:border-volt-gold/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.15)] hover:-translate-y-1 transition-all duration-300;
+  }
+
+  .container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  .section {
+    @apply py-16 md:py-24 relative overflow-hidden;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-neutral-900 dark:text-white font-display;
+  }
+
+  .section-subtitle {
+    @apply text-lg md:text-xl font-normal mb-8 text-neutral-600 dark:text-neutral-300 max-w-3xl;
+  }
+
+  .tactile-btn {
+    @apply transition-transform active:scale-95;
+  }
+
+  .input-field {
+    @apply w-full px-3.5 py-3 sm:py-2.5 rounded-xl text-base sm:text-sm font-medium
+           bg-white text-neutral-900 border border-neutral-300 placeholder:text-neutral-400
+           dark:bg-[#121214] dark:text-neutral-100 dark:border-neutral-700 dark:placeholder:text-neutral-500
+           focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20
+           dark:focus:border-volt-gold dark:focus:ring-volt-gold/20
+           transition-all duration-150;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
+
+/* ==========================================================================
+   NAVIGATION MENU SEQUENCED ENTRANCE & FADE-AWAY EXIT ANIMATIONS
+   ========================================================================== */
+@keyframes menuOverlayIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(16px);
+  }
+}
+
+@keyframes menuOverlayOut {
+  from {
+    opacity: 1;
+    backdrop-filter: blur(16px);
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    transform: scale(0.98);
+  }
+}
+
+@keyframes navGuideLineGrow {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes navItemSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes navItemFadeAway {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(24px) scale(0.96);
+  }
+}
+
+.menu-overlay-enter {
+  animation: menuOverlayIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, backdrop-filter;
+}
+
+.menu-overlay-exit {
+  animation: menuOverlayOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: opacity, transform, backdrop-filter;
+}
+
+.nav-guideline-in {
+  transform-origin: top;
+  animation: navGuideLineGrow 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.nav-guideline-out {
+  transform-origin: bottom;
+  animation: navGuideLineGrow 0.25s cubic-bezier(0.4, 0, 0.2, 1) reverse forwards;
+}
+
+.nav-item-animated-in {
+  opacity: 0;
+  animation: navItemSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.nav-item-animated-out {
+  animation: navItemFadeAway 0.26s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: transform, opacity;
+}
+
+/* Ghost Typographic Watermark */
+.text-ghost {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.06);
+  user-select: none;
+  pointer-events: none;
+}
+
+html:not(.dark) .text-ghost,
+.light .text-ghost {
+  -webkit-text-stroke: 1.5px rgba(15, 23, 42, 0.06);
+}
+
