@@ -1,20 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  Cpu, 
-  Users, 
-  Trophy, 
-  Calendar, 
-  Rocket, 
-  Bot, 
-  Code, 
-  Share2, 
-  ArrowRight, 
-  CheckCircle2, 
-  Terminal,
-  Zap,
-  Lightbulb
+import {
+  Cpu,
+  Users,
+  Trophy,
+  Calendar,
+  Rocket,
+  Bot,
+  Code,
+  Share2,
+  ArrowRight,
+  Lightbulb,
 } from 'lucide-react';
 import CardComponent from '../components/CardComponent';
 import ScrollAnimationWrapper from '../components/ScrollAnimationWrapper';
@@ -24,72 +21,86 @@ const Home: React.FC = () => {
     {
       icon: <Lightbulb className="w-7 h-7 text-volt-gold" />,
       title: 'Propose Problems',
-      description: 'Post a problem statement, real-world challenge, or project concept and find like-minded collaborators.',
-      link: '/community'
+      description:
+        'Post a problem statement, real-world engineering challenge, or project concept and find like-minded collaborators.',
+      link: '/community',
     },
     {
       icon: <Users className="w-7 h-7 text-volt-gold" />,
-      title: 'Form Squads',
-      description: 'Assemble focused multi-track project sub-teams across software, hardware, and design on WhatsApp & Discord.',
-      link: '/community'
+      title: 'Form Teams',
+      description:
+        'Assemble focused multi-disciplinary project teams across robotics, software, AI, and outreach.',
+      link: '/teams',
     },
     {
       icon: <Cpu className="w-7 h-7 text-volt-gold" />,
       title: 'Build Prototypes',
-      description: 'Brainstorm architectures, develop working proof-of-concepts, and test your solutions iteratively.',
-      link: '/community'
+      description:
+        'Brainstorm architectures, develop working proof-of-concepts, and test your solutions iteratively.',
+      link: '/projects',
     },
     {
       icon: <Rocket className="w-7 h-7 text-volt-gold" />,
       title: 'Community Projects',
-      description: 'Turn concepts into working tools and open-source systems, displayed and credited directly in our Projects section.',
-      link: '/projects'
+      description:
+        'Turn concepts into working hardware and software systems recorded and credited in our Projects registry.',
+      link: '/projects',
     },
     {
       icon: <Trophy className="w-7 h-7 text-volt-gold" />,
-      title: 'Competitions',
-      description: 'Team up with community members to represent squads and compete in collegiate engineering and technical competitions.',
-      link: '/teams'
+      title: 'Competitions & Milestones',
+      description:
+        'Team up with community members to represent VoltEdge in national robotics and technical competitions.',
+      link: '/teams',
     },
     {
       icon: <Calendar className="w-7 h-7 text-volt-gold" />,
-      title: 'Collaborative Sessions',
-      description: 'Attend peer-led meetups, technical tutorials, and interactive sessions with plans for future external guest talks.',
-      link: '/community'
-    }
+      title: 'Workshops & Outreach',
+      description:
+        'Participate in hands-on workshops, technical tutorials, and student STEM outreach programs.',
+      link: '/community',
+    },
   ];
 
   const divisions = [
     {
+      code: 'VIC-DIV-01',
+      roman: 'DIVISION I',
       icon: <Bot className="w-8 h-8 text-volt-gold" />,
-      title: 'Robotics Engineering',
-      desc: 'Connect with like-minded peers passionate about robotics and hardware systems. Form squads to build machines and projects wherever you work, collaborating through our community with plans for future dedicated maker spaces.',
-      highlight: 'Robotics Systems • Hardware Prototyping • Like-Minded Creators'
+      title: 'Division of Electronics & Robotic Systems',
+      desc: 'Focuses on electronics, embedded systems, robotics, automation, hardware development, sensor networks, and intelligent physical systems.',
+      highlight: 'Robotics • Embedded Systems • Hardware • IoT & Sensors',
     },
     {
+      code: 'VIC-DIV-02',
+      roman: 'DIVISION II',
       icon: <Code className="w-8 h-8 text-accent" />,
-      title: 'Computing Technology',
-      desc: 'Web development, software applications, full-stack development, programming, digital tools, utility software, data science, artificial intelligence, and machine learning.',
-      highlight: 'Full-Stack • AI & ML • Data Science • Utility Software'
+      title: 'Division of Computing & Intelligent Sciences',
+      desc: 'Focuses on core computer science, software engineering, artificial intelligence, machine learning, web/app development, and computing research.',
+      highlight: 'Software Engineering • AI & ML • Computer Vision • Web Platforms',
     },
     {
+      code: 'VIC-DIV-03',
+      roman: 'DIVISION III',
       icon: <Calendar className="w-8 h-8 text-volt-yellow" />,
-      title: 'Events Workshops',
-      desc: 'Community meetups, peer-to-peer tutorials, collaborative technical workshops, and STEM outreach programs—with future plans to invite external engineers and industry professionals for guest sessions.',
-      highlight: 'Peer Tutorials • Tech Meetups • STEM Outreach'
+      title: 'Division of Events, Workshops & Community Outreach',
+      desc: 'Organizes technical workshops, hackathons, seminars, STEM outreach programs, school/community engagement, and volunteer coordination.',
+      highlight: 'Technical Workshops • STEM Outreach • Community Programs',
     },
     {
+      code: 'VIC-DIV-04',
+      roman: 'DIVISION IV',
       icon: <Share2 className="w-8 h-8 text-emerald-400" />,
-      title: 'Operations Community',
-      desc: 'Operating this community: community management, community social media, project documentation, member support, and coordinating team activities.',
-      highlight: 'Community Operations • Documentation • Coordination'
-    }
+      title: 'Division of Organizational Operations & Administration',
+      desc: 'Responsible for the internal operation and administration of VIC, including official documentation, records, digital assets, communications, and finance administration.',
+      highlight: 'Official Documentation • Operations • Records & Media',
+    },
   ];
 
   return (
     <div className="overflow-hidden">
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[85vh] flex items-center bg-gray-50 dark:bg-onyx-950 py-12 md:py-20 border-b border-neutral-200/80 dark:border-neutral-800/80">
+      <section className="relative min-h-[82vh] flex items-center bg-gray-50 dark:bg-onyx-950 py-12 md:py-20 border-b border-neutral-200/80 dark:border-neutral-800/80">
         <div className="absolute inset-0 bg-grid-pattern bg-[length:28px_28px] opacity-40 pointer-events-none" />
 
         <div className="container-custom relative z-10">
@@ -102,7 +113,7 @@ const Home: React.FC = () => {
                 transition={{ duration: 0.4 }}
                 className="inline-flex items-center px-3 py-1 rounded-full bg-neutral-900 text-volt-gold border border-volt-gold/40 text-xs font-mono font-bold"
               >
-                <span>PEER-TO-PEER NETWORK</span>
+                <span>VOLTEDGE INNOVATION COMMUNITY (VIC)</span>
               </motion.div>
 
               <div className="space-y-3">
@@ -113,15 +124,15 @@ const Home: React.FC = () => {
                   </span>
                 </h1>
                 <p className="text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-300 max-w-xl leading-relaxed">
-                  A student-founded engineering community connecting ambitious creators across robotics, full-stack software, data science, and AI through real problem statements and project squads.
+                  A student-founded engineering and innovation community connecting creators across electronics, robotics, software, AI, and STEM outreach through collaborative project teams.
                 </p>
               </div>
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                <Link to="/join" className="w-full sm:w-auto">
+                <Link to="/apply" className="w-full sm:w-auto">
                   <button className="btn btn-primary w-full sm:w-auto text-xs sm:text-sm py-3.5 px-7 font-mono font-bold flex items-center justify-center gap-2 shadow-lg">
-                    <span>Join Community</span>
+                    <span>Apply to Join</span>
                     <ArrowRight size={15} />
                   </button>
                 </Link>
@@ -135,21 +146,21 @@ const Home: React.FC = () => {
               {/* 3 Core Community Focus Points */}
               <div className="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-left">
                 <div className="p-3 rounded-xl bg-white dark:bg-onyx-900 border border-neutral-200 dark:border-neutral-800 space-y-1">
-                  <div className="text-xs font-mono font-bold text-volt-gold">COMMUNITY MISSION</div>
+                  <div className="text-xs font-mono font-bold text-volt-gold">4 DIVISIONS</div>
                   <div className="text-xs text-neutral-600 dark:text-neutral-400">
-                    Collaborate and create a network of like-minded problem solvers.
+                    Robotics, Computing &amp; AI, Events &amp; Outreach, and Operations.
                   </div>
                 </div>
                 <div className="p-3 rounded-xl bg-white dark:bg-onyx-900 border border-neutral-200 dark:border-neutral-800 space-y-1">
-                  <div className="text-xs font-mono font-bold text-volt-gold">PEER SQUADS</div>
+                  <div className="text-xs font-mono font-bold text-volt-gold">6 ACTIVE TEAMS</div>
                   <div className="text-xs text-neutral-600 dark:text-neutral-400">
-                    Students form teams based on real problem statements.
+                    Dedicated project, research, workshop, and operations teams.
                   </div>
                 </div>
                 <div className="p-3 rounded-xl bg-white dark:bg-onyx-900 border border-neutral-200 dark:border-neutral-800 space-y-1">
-                  <div className="text-xs font-mono font-bold text-volt-gold">BUILD &amp; TEST</div>
+                  <div className="text-xs font-mono font-bold text-volt-gold">REAL BUILDS</div>
                   <div className="text-xs text-neutral-600 dark:text-neutral-400">
-                    Brainstorm architectures and build working prototypes.
+                    Autonomous rovers, IoT nodes, computer vision, and STEM kits.
                   </div>
                 </div>
               </div>
@@ -169,25 +180,25 @@ const Home: React.FC = () => {
                     </div>
 
                     <div className="space-y-2 text-xs">
-                      <p className="text-neutral-500">// Problem-solving &amp; project building network</p>
+                      <p className="text-neutral-500">// Multidisciplinary engineering &amp; innovation</p>
                       <div className="flex justify-between items-center">
-                        <span className="text-neutral-400">COMMUNITY TYPE:</span>
-                        <span className="text-emerald-400 font-bold">PEER-TO-PEER</span>
+                        <span className="text-neutral-400">LOCATION:</span>
+                        <span className="text-emerald-400 font-bold">BHATKAL, KARNATAKA</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-neutral-400">CORE MODEL:</span>
-                        <span className="text-volt-gold font-bold">SQUAD FORMATION</span>
+                        <span className="text-neutral-400">FOUNDING MEMBERS:</span>
+                        <span className="text-volt-gold font-bold">6 FOUNDERS (VIC-M001..006)</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-neutral-400">CHANNELS:</span>
-                        <span className="text-white font-bold">WHATSAPP &amp; DISCORD</span>
+                        <span className="text-neutral-400">DIVISIONS:</span>
+                        <span className="text-white font-bold">4 PERMANENT DIVISIONS</span>
                       </div>
                     </div>
 
                     <div className="pt-3 border-t border-neutral-800 flex items-center justify-between text-[11px] text-neutral-400">
-                      <span>4 Divisions • Active Squads</span>
-                      <Link to="/community" className="text-volt-gold font-bold hover:underline">
-                        Explore Divisions →
+                      <span>6 Active Teams • 5 Projects</span>
+                      <Link to="/teams" className="text-volt-gold font-bold hover:underline">
+                        View Teams &amp; Achievements →
                       </Link>
                     </div>
                   </div>
@@ -208,14 +219,14 @@ const Home: React.FC = () => {
               </span>
               <h2 className="section-title">Our Purpose</h2>
               <p className="text-base sm:text-xl md:text-2xl text-neutral-700 dark:text-neutral-200 leading-relaxed">
-                VoltEdge Innovation Community is a collaborative student platform where members connect with like-minded peers, post real problem statements, form focused squads on WhatsApp &amp; Discord, and build prototypes together under the VoltEdge banner.
+                VoltEdge Innovation Community (VIC) is a structured student engineering organization where members collaborate across four permanent divisions to build hardware, software, AI systems, and community STEM programs.
               </p>
             </div>
           </ScrollAnimationWrapper>
         </div>
       </section>
 
-      {/* 3. WHAT WE DO (6 SIMPLE PILLARS) */}
+      {/* 3. WHAT WE DO */}
       <section className="section bg-gray-50 dark:bg-onyx-950 border-b border-neutral-200/80 dark:border-neutral-800/80">
         <div className="container-custom">
           <ScrollAnimationWrapper>
@@ -225,7 +236,7 @@ const Home: React.FC = () => {
               </span>
               <h2 className="section-title">What We Do</h2>
               <p className="section-subtitle mx-auto">
-                Everything in VoltEdge revolves around learning together, building cool things, and helping each other grow.
+                Everything in VoltEdge revolves around engineering real prototypes, conducting research, and growing together.
               </p>
             </div>
           </ScrollAnimationWrapper>
@@ -233,7 +244,7 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {whatWeDo.map((action, index) => (
               <ScrollAnimationWrapper key={index} delay={index * 0.06}>
-                <CardComponent className="h-full flex flex-col justify-between">
+                <CardComponent className="h-full flex flex-col justify-between p-6">
                   <div>
                     <div className="p-3 rounded-2xl bg-volt-gold/10 border border-volt-gold/20 w-fit mb-4">
                       {action.icon}
@@ -258,25 +269,29 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
-      {/* 4. FOUR DIVISIONS (THE FOUR AREAS) */}
+
+      {/* 4. FOUR PERMANENT DIVISIONS */}
       <section className="section bg-white dark:bg-onyx-900/40 border-b border-neutral-200/80 dark:border-neutral-800/80">
         <div className="container-custom">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
             <ScrollAnimationWrapper>
               <div>
                 <span className="text-xs font-mono font-bold tracking-widest text-volt-gold uppercase">
-                  Community Tracks
+                  Organizational Structure
                 </span>
-                <h2 className="section-title">Four Divisions</h2>
+                <h2 className="section-title">Four Permanent Divisions</h2>
                 <p className="section-subtitle mb-0">
-                  Four specialized tracks that collaborate seamlessly without departmental boundaries.
+                  Four specialized divisions working together across hardware, software, outreach, and operations.
                 </p>
               </div>
             </ScrollAnimationWrapper>
 
             <ScrollAnimationWrapper delay={0.1}>
-              <Link to="/community" className="mt-3 md:mt-0 inline-flex items-center gap-1.5 text-xs font-mono font-bold text-volt-gold hover:text-amber-400">
-                <span>Explore Community</span>
+              <Link
+                to="/community"
+                className="mt-3 md:mt-0 inline-flex items-center gap-1.5 text-xs font-mono font-bold text-volt-gold hover:text-amber-400"
+              >
+                <span>Explore Divisions</span>
                 <ArrowRight size={14} />
               </Link>
             </ScrollAnimationWrapper>
@@ -284,15 +299,15 @@ const Home: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {divisions.map((div, index) => (
-              <ScrollAnimationWrapper key={index} delay={index * 0.08}>
-                <CardComponent className="h-full flex flex-col justify-between">
+              <ScrollAnimationWrapper key={div.code} delay={index * 0.08}>
+                <CardComponent className="h-full flex flex-col justify-between p-6">
                   <div>
                     <div className="flex items-center justify-between mb-3.5">
                       <div className="p-2.5 rounded-2xl bg-neutral-100 dark:bg-onyx-800 border border-neutral-200 dark:border-neutral-700">
                         {div.icon}
                       </div>
-                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-neutral-100 dark:bg-onyx-800 text-neutral-500">
-                        TRACK 0{index + 1}
+                      <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded bg-neutral-100 dark:bg-onyx-800 text-volt-gold border border-volt-gold/30">
+                        {div.roman} • {div.code}
                       </span>
                     </div>
 
@@ -311,15 +326,6 @@ const Home: React.FC = () => {
               </ScrollAnimationWrapper>
             ))}
           </div>
-
-          <div className="mt-10 text-center">
-            <Link to="/community">
-              <button className="btn btn-secondary px-7 py-3 text-xs font-mono group">
-                <span>Explore Community Tracks</span>
-                <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-              </button>
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -328,17 +334,17 @@ const Home: React.FC = () => {
         <div className="container-custom max-w-3xl mx-auto space-y-5">
           <ScrollAnimationWrapper>
             <h2 className="text-2xl sm:text-4xl font-black font-display tracking-tight text-white uppercase">
-              Join Community
+              Ready to Join VoltEdge?
             </h2>
 
             <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed max-w-xl mx-auto">
-              Join a dedicated community of creators, students, and engineers turning bold concepts into working prototypes.
+              Submit your membership application directly to the VoltEdge Innovation Community administration board.
             </p>
 
             <div className="pt-2">
-              <Link to="/join">
+              <Link to="/apply">
                 <button className="btn btn-primary text-xs sm:text-sm px-8 py-3.5 font-bold shadow-xl">
-                  Become a Member
+                  Open Membership Application Form
                 </button>
               </Link>
             </div>

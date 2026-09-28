@@ -1,5 +1,12 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { AppProvider } from './contexts/AppContext';
 import Layout from './components/Layout';
@@ -15,11 +22,32 @@ import Apply from './pages/Apply';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import NotFound from './pages/NotFound';
 
+const QueryRouteRedirector: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const page = params.get('page');
+    if (page) {
+      const target = page.startsWith('/') ? page : `/${page}`;
+      navigate(target, { replace: true });
+    }
+  }, [location.search, navigate]);
+
+  return null;
+};
+
 const App: React.FC = () => {
+  const isSubpath =
+    typeof window !== 'undefined' &&
+    window.location.pathname.startsWith('/application-form');
+
   return (
     <ThemeProvider>
       <AppProvider>
-        <Router>
+        <Router basename={isSubpath ? '/application-form' : '/'}>
+          <QueryRouteRedirector />
           <Routes>
             {/* Public Website Routes */}
             <Route
@@ -30,6 +58,7 @@ const App: React.FC = () => {
                 </Layout>
               }
             />
+            <Route path="/index.html" element={<Navigate to="/" replace />} />
             <Route
               path="/about"
               element={

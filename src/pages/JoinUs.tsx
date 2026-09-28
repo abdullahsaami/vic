@@ -1,16 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, 
-  Users, 
-  MessageSquare, 
-  BookOpen, 
-  Trophy, 
-  CheckCircle2, 
-  ShieldCheck, 
-  FileText,
-  Lock
-} from 'lucide-react';
+import { ArrowRight, Users, MessageSquare, BookOpen, Trophy } from 'lucide-react';
 import CardComponent from '../components/CardComponent';
 import ScrollAnimationWrapper from '../components/ScrollAnimationWrapper';
 
@@ -18,51 +8,51 @@ const JoinUs: React.FC = () => {
   const benefits = [
     {
       icon: <MessageSquare size={20} />,
-      title: 'Private Channels',
+      title: 'Official Division Membership',
       color: 'border-l-volt-gold text-volt-gold',
-      desc: 'Direct verified access to the official VoltEdge Discord server and WhatsApp Community groups for project discussions, sprint calls, and announcements.'
+      desc: 'Receive an official Member ID (VIC-M001+) and join one of our four permanent divisions.',
     },
     {
       icon: <Users size={20} />,
-      title: 'Project Squads',
+      title: 'Project Teams',
       color: 'border-l-accent text-accent',
-      desc: 'Connect with like-minded students across software, hardware, and design to form focused teams around real problem statements and prototypes.'
+      desc: 'Collaborate with fellow engineering students in dedicated hardware, software, AI, and workshop teams.',
     },
     {
       icon: <BookOpen size={20} />,
-      title: 'Peer Learning',
+      title: 'Workshops & Research',
       color: 'border-l-volt-yellow text-volt-yellow',
-      desc: 'Learn collaboratively through shared peer knowledge, technical tutorials, and future guest sessions with external industry professionals.'
+      desc: 'Learn collaboratively through hands-on technical tutorials, lab prototyping, and community STEM initiatives.',
     },
     {
       icon: <Trophy size={20} />,
-      title: 'Competitions & Showcases',
+      title: 'Competitions & Recognition',
       color: 'border-l-emerald-500 text-emerald-400',
-      desc: 'Represent VoltEdge in collegiate technical competitions and have your open-source projects officially recorded and showcased on the community platform.'
-    }
+      desc: 'Represent VoltEdge in collegiate robotics and technical competitions and have your achievements officially recorded.',
+    },
   ];
 
   const steps = [
     {
       num: '01',
       title: 'Submit Application',
-      desc: 'Complete the dedicated online application form with your genuine academic and technical background.'
+      desc: 'Complete the official online membership application form with your academic and technical details.',
     },
     {
       num: '02',
-      title: 'Team Review',
-      desc: 'The VoltEdge coordination team reviews your background, interests, and motivation.'
+      title: 'Internal Review',
+      desc: 'Your application is sent directly to the VIC Internal Administration system for board review.',
     },
     {
       num: '03',
-      title: 'Approval Email',
-      desc: 'Once approved, an official welcome notification is dispatched directly to your registered email address.'
+      title: 'Approval & Induction',
+      desc: 'Once approved, you are inducted into the official Member Registry with a permanent Member ID.',
     },
     {
       num: '04',
-      title: 'Private Community Links',
-      desc: 'Your email contains confidential invite links to join our private WhatsApp and Discord hubs.'
-    }
+      title: 'Join Your Team',
+      desc: 'Receive your official welcome communication and begin collaborating with your division and project team.',
+    },
   ];
 
   return (
@@ -80,7 +70,7 @@ const JoinUs: React.FC = () => {
             </h1>
 
             <p className="text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto leading-relaxed">
-              Join a community of student creators who connect over real problem statements, form collaborative squads, and build prototypes together.
+              Join VoltEdge Innovation Community (VIC) to collaborate across electronics, robotics, software, AI, and STEM outreach.
             </p>
 
             <div className="pt-3">
@@ -95,7 +85,7 @@ const JoinUs: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. MEMBER PRIVILEGES (WHAT YOU GET) */}
+      {/* 2. MEMBER PRIVILEGES */}
       <section className="section bg-white dark:bg-onyx-900/40 border-b border-neutral-200/80 dark:border-neutral-800/80">
         <div className="container-custom max-w-4xl">
           <ScrollAnimationWrapper>
@@ -105,7 +95,7 @@ const JoinUs: React.FC = () => {
               </span>
               <h2 className="section-title">What You Get</h2>
               <p className="section-subtitle mx-auto">
-                What you receive immediately upon verified onboarding into VoltEdge.
+                What you receive upon verified induction into VoltEdge Innovation Community.
               </p>
             </div>
           </ScrollAnimationWrapper>
@@ -113,7 +103,9 @@ const JoinUs: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {benefits.map((benefit, idx) => (
               <ScrollAnimationWrapper key={idx} delay={idx * 0.08}>
-                <CardComponent className={`p-6 border-l-4 ${benefit.color} h-full flex flex-col justify-between shadow-sm`}>
+                <CardComponent
+                  className={`p-6 border-l-4 ${benefit.color} h-full flex flex-col justify-between shadow-sm`}
+                >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <h3 className="font-display font-bold text-lg text-neutral-900 dark:text-white">
@@ -144,7 +136,7 @@ const JoinUs: React.FC = () => {
               </span>
               <h2 className="section-title">How to Join</h2>
               <p className="section-subtitle mx-auto">
-                Four simple steps to verify your student membership and receive private channel credentials.
+                Four simple steps from submitting your application to joining your division and team.
               </p>
             </div>
           </ScrollAnimationWrapper>
@@ -171,7 +163,7 @@ const JoinUs: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. APPLICATION GATEWAY CARD (ORGANIZED & PROFESSIONAL) */}
+      {/* 4. APPLICATION GATEWAY CARD */}
       <section className="py-16 sm:py-20 bg-white dark:bg-onyx-900/60 border-b border-neutral-200/80 dark:border-neutral-800/80">
         <div className="container-custom max-w-3xl mx-auto">
           <ScrollAnimationWrapper>
@@ -184,7 +176,7 @@ const JoinUs: React.FC = () => {
                   Ready to Apply?
                 </h3>
                 <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 max-w-lg mx-auto leading-relaxed">
-                  The application form is hosted on a dedicated, mobile-optimized page. It takes less than 3 minutes to complete.
+                  Complete the membership application form. Your submission goes directly to the VIC Internal Administration portal.
                 </p>
               </div>
 
@@ -192,10 +184,10 @@ const JoinUs: React.FC = () => {
                 <div className="font-mono font-bold text-amber-600 dark:text-volt-gold uppercase tracking-wider text-xs">
                   Application Checklist:
                 </div>
-                <div>• Genuine student identity &amp; college credentials</div>
-                <div>• Division choice (Robotics, Computing, Events, Operations)</div>
-                <div>• Real problem statement or engineering interests</div>
-                <div>• Confirmation of peer respect and anti-leak agreements</div>
+                <div>• Student contact &amp; academic details</div>
+                <div>• Preferred Division (Division I, II, III, or IV)</div>
+                <div>• Technical skills &amp; engineering interests</div>
+                <div>• Community pledge confirmation</div>
               </div>
 
               <div className="pt-2">

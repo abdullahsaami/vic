@@ -1,8 +1,8 @@
-export type DivisionType = 
-  | 'Robotics & Engineering'
-  | 'Computing & Technology'
-  | 'Events & Workshops'
-  | 'Operations & Community';
+export type DivisionType =
+  | 'Division I — Electronics & Robotic Systems'
+  | 'Division II — Computing & Intelligent Sciences'
+  | 'Division III — Events, Workshops & Community Outreach'
+  | 'Division IV — Organizational Operations & Administration';
 
 export interface Member {
   id: string;
@@ -36,6 +36,7 @@ export interface Application {
   course: string;
   yearSemester: string;
   primaryDivision: DivisionType;
+  roleAppliedFor?: string;
   secondaryInterests: string[];
   skills: string[];
   whyJoin: string;
@@ -55,14 +56,17 @@ export interface Project {
   id: string;
   title: string;
   division: DivisionType;
-  status: 'In Incubation' | 'Prototyping' | 'In Progress' | 'Active Build' | 'Completed' | 'Recruiting';
+  teamName?: string;
+  status: 'Planning' | 'Active' | 'Completed' | 'In Progress' | 'Active Build' | 'Prototyping';
+  category?: string;
   problemStatement?: string;
   solution?: string;
+  description?: string;
+  objectives?: string;
   techStack?: string[];
   members?: string[];
   repositoryUrl?: string;
   liveUrl?: string;
-  description?: string;
   lead?: string;
   lookingFor?: string[];
   tags?: string[];
@@ -73,12 +77,28 @@ export interface CommunityTeam {
   id: string;
   name: string;
   tagline: string;
-  division: string;
-  achievement: string;
-  status: 'Active Competitor' | 'R&D Group' | 'Recruiting';
+  division: DivisionType;
+  teamType: string;
+  members: string[];
+  achievement?: string;
+  status: 'Active' | 'Active Competitor' | 'R&D Group' | 'Recruiting';
   externalUrl?: string;
-  image: string;
   description: string;
+}
+
+export interface CommunityAchievement {
+  id: string;
+  title: string;
+  recipient: string;
+  scope: 'Member' | 'Team' | 'Division' | 'Organization';
+  category: 'Competition' | 'Hackathon' | 'Workshop' | 'Research' | 'Award' | 'Organizational';
+  eventName: string;
+  date: string;
+  positionResult: string;
+  location: string;
+  issuedBy: string;
+  description: string;
+  evidenceUrl?: string;
 }
 
 export interface CommunityAnnouncement {

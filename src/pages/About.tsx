@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Lightbulb, 
-  Users2, 
-  Code, 
-  ShieldCheck, 
-  GraduationCap, 
-  ArrowRight, 
-  Zap, 
+import {
+  Lightbulb,
+  Users2,
+  Code,
+  ShieldCheck,
+  GraduationCap,
   Linkedin,
-  Info
+  Info,
 } from 'lucide-react';
 import CardComponent from '../components/CardComponent';
 import ScrollAnimationWrapper from '../components/ScrollAnimationWrapper';
@@ -20,37 +18,66 @@ const About: React.FC = () => {
     {
       title: 'Peer Learning',
       icon: <Users2 className="w-6 h-6 text-volt-gold" />,
-      description: 'A genuine peer-to-peer environment where students learn from each other through collaborative projects rather than lectures.'
+      description:
+        'A peer-to-peer engineering environment where students learn from each other through collaborative hardware and software projects.',
     },
     {
       title: 'Problem Statements',
       icon: <Lightbulb className="w-6 h-6 text-accent" />,
-      description: 'Members identify real problems across campus, community, or technology, and rally like-minded peers to solve them.'
+      description:
+        'Members identify real technical challenges across robotics, computing, and community outreach and form teams to solve them.',
     },
     {
       title: 'Prototype & Build',
       icon: <Code className="w-6 h-6 text-volt-yellow" />,
-      description: 'Focusing on brainstorming solutions, testing iterations, and building working prototypes that produce tangible results.'
+      description:
+        'Focusing on designing architectures, testing iterations, and building working prototypes with verifiable outcomes.',
     },
     {
-      title: 'Future Plans & Guest Sessions',
+      title: 'Workshops & STEM Outreach',
       icon: <GraduationCap className="w-6 h-6 text-emerald-400" />,
-      description: 'In the future, we plan to invite external industry professionals and experienced engineers for specialized masterclasses and community sessions.'
+      description:
+        'Organizing hands-on technical workshops, student tutorials, and community STEM awareness initiatives.',
     },
     {
-      title: 'Mutual Respect',
+      title: 'Structured Governance',
       icon: <ShieldCheck className="w-6 h-6 text-pink-400" />,
-      description: 'Encouraging open collaboration, constructive feedback, crediting peers, and fostering an inclusive team culture.'
-    }
+      description:
+        'Operating under the VIC Founding Charter with clear documentation, ethical collaboration, and member recognition.',
+    },
   ];
 
   const workflowSteps = [
-    { step: '01', title: 'JOIN CHANNELS', desc: 'Get verified and added to the official WhatsApp Community and Discord server.' },
-    { step: '02', title: 'POST PROBLEM', desc: 'Post a problem statement, challenge, or project idea you want to work on.' },
-    { step: '03', title: 'CONNECT PEERS', desc: 'Connect with like-minded members who share an interest in solving that problem.' },
-    { step: '04', title: 'FORM SQUADS', desc: 'Assemble a focused project squad under VoltEdge with clear member goals.' },
-    { step: '05', title: 'BUILD & TEST', desc: 'Brainstorm solutions, design architectures, build prototypes, and run tests.' },
-    { step: '06', title: 'RECORD PROJECT', desc: 'Showcase results and have the project credited under the VoltEdge Community banner.' },
+    {
+      step: '01',
+      title: 'SUBMIT APPLICATION',
+      desc: 'Apply online with your academic background, division preference, and technical skills.',
+    },
+    {
+      step: '02',
+      title: 'ADMINISTRATION REVIEW',
+      desc: 'Your application is reviewed directly inside the VIC Internal Administration system.',
+    },
+    {
+      step: '03',
+      title: 'MEMBER INDUCTION',
+      desc: 'Approved members receive an official Member ID (VIC-M001+) and division assignment.',
+    },
+    {
+      step: '04',
+      title: 'JOIN DIVISION & TEAM',
+      desc: 'Collaborate inside one of our four permanent divisions and specialized project teams.',
+    },
+    {
+      step: '05',
+      title: 'BUILD & PROTOTYPE',
+      desc: 'Develop robotics platforms, IoT hardware, AI models, web systems, or STEM programs.',
+    },
+    {
+      step: '06',
+      title: 'RECORD ACHIEVEMENTS',
+      desc: 'Showcase completed projects and competition milestones under the VoltEdge banner.',
+    },
   ];
 
   return (
@@ -60,7 +87,7 @@ const About: React.FC = () => {
         <div className="container-custom text-center max-w-3xl mx-auto space-y-4">
           <ScrollAnimationWrapper>
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-volt-gold/10 text-amber-600 dark:text-volt-gold border border-volt-gold/30 text-xs font-mono font-bold select-none">
-              <span>PEER COMMUNITY</span>
+              <span>ABOUT VOLTEDGE INNOVATION COMMUNITY</span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-display text-neutral-900 dark:text-white uppercase tracking-tight">
@@ -68,7 +95,7 @@ const About: React.FC = () => {
             </h1>
 
             <p className="text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto leading-relaxed">
-              We are a peer-to-peer student innovation network where passionate builders connect, form squads around real problem statements, and build projects together.
+              Founded in Bhatkal, Karnataka, VoltEdge Innovation Community (VIC) is a multidisciplinary student engineering and innovation organization structured across four permanent divisions.
             </p>
           </ScrollAnimationWrapper>
         </div>
@@ -87,7 +114,7 @@ const About: React.FC = () => {
                   Core Mission
                 </h3>
                 <p className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm leading-relaxed">
-                  Provide an open, collaborative platform where students with real problem statements connect with like-minded peers across technology, forming focused project teams to brainstorm, test, and build solutions together.
+                  Provide a structured, collaborative engineering platform where students across electronics, robotics, computing, AI, and community outreach work together in specialized teams to build real-world prototypes.
                 </p>
               </CardComponent>
             </ScrollAnimationWrapper>
@@ -101,7 +128,7 @@ const About: React.FC = () => {
                   Core Vision
                 </h3>
                 <p className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm leading-relaxed">
-                  A strong multidisciplinary student network where no builder works in isolation—empowering every member to find teammates, turn concepts into impactful builds, and compete in competitions.
+                  Build an enduring multidisciplinary student innovation community that develops impactful hardware and software systems, competes at national levels, and advances STEM outreach.
                 </p>
               </CardComponent>
             </ScrollAnimationWrapper>
@@ -119,7 +146,7 @@ const About: React.FC = () => {
               </span>
               <h2 className="section-title">Our Values</h2>
               <p className="section-subtitle mx-auto">
-                Guiding principles that define our peer-driven community culture.
+                Guiding principles that define our community culture and engineering standards.
               </p>
             </div>
           </ScrollAnimationWrapper>
@@ -127,7 +154,7 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {values.map((v, idx) => (
               <ScrollAnimationWrapper key={idx} delay={idx * 0.06}>
-                <CardComponent className="h-full flex flex-col">
+                <CardComponent className="h-full flex flex-col p-6">
                   <div className="p-3 rounded-2xl bg-neutral-100 dark:bg-onyx-800 border border-neutral-200 dark:border-neutral-700 w-fit mb-4">
                     {v.icon}
                   </div>
@@ -152,9 +179,9 @@ const About: React.FC = () => {
               <span className="text-xs font-mono font-bold tracking-widest text-volt-gold uppercase">
                 Process
               </span>
-              <h2 className="section-title">Our Workflow</h2>
+              <h2 className="section-title">How VIC Operates</h2>
               <p className="section-subtitle mx-auto">
-                How members connect over problem statements, assemble squads, and build projects.
+                From membership application to division assignment, team collaboration, and project delivery.
               </p>
             </div>
           </ScrollAnimationWrapper>
@@ -164,7 +191,7 @@ const About: React.FC = () => {
               <ScrollAnimationWrapper key={idx} delay={idx * 0.05}>
                 <div className="p-5 rounded-2xl bg-white dark:bg-onyx-900 border border-neutral-200/80 dark:border-neutral-800 h-full flex flex-col justify-between hover:border-volt-gold/40 transition-colors shadow-sm">
                   <div>
-                    <span className="font-mono text-xl font-black text-neutral-400 dark:text-neutral-600 block mb-2">
+                    <span className="font-mono text-xl font-black text-volt-gold block mb-2">
                       {step.step}
                     </span>
                     <h4 className="font-display font-bold text-sm sm:text-base text-neutral-900 dark:text-white mb-1.5">
@@ -181,17 +208,17 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. EXECUTIVE BOARD */}
+      {/* 5. FOUNDING MEMBERS */}
       <section className="section bg-gray-50 dark:bg-onyx-950 border-b border-neutral-200/80 dark:border-neutral-800/80">
         <div className="container-custom">
           <ScrollAnimationWrapper>
             <div className="text-center max-w-3xl mx-auto mb-10">
               <span className="text-xs font-mono font-bold tracking-widest text-volt-gold uppercase">
-                Leadership
+                Founding Assembly
               </span>
-              <h2 className="section-title">Executive Board</h2>
+              <h2 className="section-title">Founding Members</h2>
               <p className="section-subtitle mx-auto">
-                Division founders and community coordination team.
+                The six Founding Members of VoltEdge Innovation Community (VIC-M001 to VIC-M006).
               </p>
             </div>
           </ScrollAnimationWrapper>
@@ -200,18 +227,21 @@ const About: React.FC = () => {
           <div className="max-w-3xl mx-auto mb-10 p-4 rounded-2xl bg-volt-gold/10 border border-volt-gold/30 text-xs font-mono text-neutral-700 dark:text-neutral-300 flex items-start gap-3">
             <Info size={18} className="text-volt-gold shrink-0 mt-0.5" />
             <p className="leading-relaxed">
-              <strong>Community Framework</strong>: {GOVERNANCE_NOTE}
+              <strong>Founding Charter Framework</strong>: {GOVERNANCE_NOTE}
             </p>
           </div>
 
-          {/* Member Cards without photos or avatars */}
+          {/* Simple Founding Member Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {CORE_LEADERSHIP_TEAM.map((member, idx) => (
-              <ScrollAnimationWrapper key={idx} delay={idx * 0.08}>
-                <CardComponent className="h-full flex flex-col justify-between p-6 sm:p-7">
+              <ScrollAnimationWrapper key={member.id} delay={idx * 0.06}>
+                <CardComponent className="h-full flex flex-col justify-between p-6">
                   <div>
                     <div className="flex items-start justify-between gap-2 mb-3">
                       <div>
+                        <span className="inline-block text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-volt-gold/15 text-amber-600 dark:text-volt-gold border border-volt-gold/30 mb-1.5">
+                          {member.id}
+                        </span>
                         <h3 className="text-xl font-bold font-display text-neutral-900 dark:text-white">
                           {member.name}
                         </h3>
@@ -224,8 +254,8 @@ const About: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-2 rounded-xl bg-neutral-100 hover:bg-neutral-200 dark:bg-onyx-800 dark:hover:bg-onyx-700 text-neutral-600 dark:text-neutral-300 hover:text-volt-gold border border-neutral-200 dark:border-neutral-700 transition-colors shrink-0"
-                        aria-label={`${member.name} LinkedIn Profile`}
-                        title="View LinkedIn Profile"
+                        aria-label={`${member.name} LinkedIn`}
+                        title="View LinkedIn"
                       >
                         <Linkedin size={16} />
                       </a>
@@ -236,9 +266,8 @@ const About: React.FC = () => {
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-500">
-                    <span className="text-volt-gold font-bold">{member.division}</span>
-                    <span className="text-[11px] text-neutral-400">Coordinator</span>
+                  <div className="pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-[11px] font-mono text-neutral-500">
+                    <span className="text-volt-gold font-bold truncate">{member.division}</span>
                   </div>
                 </CardComponent>
               </ScrollAnimationWrapper>
@@ -252,15 +281,15 @@ const About: React.FC = () => {
         <div className="container-custom max-w-xl mx-auto space-y-4">
           <ScrollAnimationWrapper>
             <h2 className="text-2xl sm:text-3xl font-display font-black uppercase">
-              Join Us
+              Apply to Join VIC
             </h2>
             <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed">
-              Have a problem statement or want to join a builder squad? Apply to join our community channels.
+              Submit your application to join one of our four permanent divisions and collaborate on engineering projects.
             </p>
             <div className="pt-2">
-              <Link to="/join">
+              <Link to="/apply">
                 <button className="btn btn-primary text-xs sm:text-sm px-8 py-3.5 font-bold">
-                  Become a Member
+                  Open Application Form
                 </button>
               </Link>
             </div>

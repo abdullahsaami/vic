@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Check, 
-  ArrowLeft, 
-  CheckCircle2, 
-  Send, 
-  AlertCircle, 
-  Lock, 
+import {
+  Check,
+  ArrowLeft,
+  CheckCircle2,
+  Send,
+  AlertCircle,
+  Lock,
   ChevronDown,
   Plus,
-  X
+  X,
 } from 'lucide-react';
 import CardComponent from '../components/CardComponent';
 import ScrollAnimationWrapper from '../components/ScrollAnimationWrapper';
@@ -31,21 +31,44 @@ const PREDEFINED_SKILLS = [
   'Media, Video Editing & Photography',
   'Technical Documentation & Writing',
   'Cloud & DevOps',
-  'Mobile App Development'
+  'Mobile App Development',
 ];
 
 const DIVISIONS_LIST: DivisionType[] = [
-  'Robotics & Engineering',
-  'Computing & Technology',
-  'Events & Workshops',
-  'Operations & Community'
+  'Division I — Electronics & Robotic Systems',
+  'Division II — Computing & Intelligent Sciences',
+  'Division III — Events, Workshops & Community Outreach',
+  'Division IV — Organizational Operations & Administration',
 ];
+
+const ROLES_LIST = [
+  'Team Member',
+  'Hardware & Robotics Member',
+  'Software & AI Contributor',
+  'Research Contributor',
+  'STEM Workshop & Outreach Member',
+  'Documentation & Operations Member',
+];
+
+function calculateAgeFromDob(dob: string): string {
+  if (!dob) return '19';
+  const birth = new Date(dob);
+  if (Number.isNaN(birth.getTime())) return '19';
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+  return age > 10 && age < 80 ? String(age) : '19';
+}
 
 const Apply: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [assignedId, setAssignedId] = useState('');
 
-  // Form Fields with Executive Team example placeholders
+  // Form Fields
   const [fullName, setFullName] = useState('');
   const [dob, setDob] = useState('');
   const [email, setEmail] = useState('');
@@ -55,7 +78,10 @@ const Apply: React.FC = () => {
   const [course, setCourse] = useState('');
   const [yearSemester, setYearSemester] = useState('');
 
-  const [primaryDivision, setPrimaryDivision] = useState<DivisionType>('Robotics & Engineering');
+  const [primaryDivision, setPrimaryDivision] = useState<DivisionType>(
+    'Division I — Electronics & Robotic Systems'
+  );
+  const [roleAppliedFor, setRoleAppliedFor] = useState<string>('Team Member');
   const [secondaryInterests, setSecondaryInterests] = useState<string[]>([]);
   const [skills, setSkills] = useState<string[]>([]);
   const [customSkillInput, setCustomSkillInput] = useState('');
@@ -98,12 +124,21 @@ const Apply: React.FC = () => {
     setSkills((prev) => prev.filter((s) => s !== skillToRemove));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setValidationError(null);
 
-    if (!fullName.trim() || !email.trim() || !phone.trim() || !city.trim() || !institution.trim() || !course.trim()) {
-      return setValidationError('Please fill in all required contact and academic fields marked with an asterisk (*).');
+    if (
+      !fullName.trim() ||
+      !email.trim() ||
+      !phone.trim() ||
+      !city.trim() ||
+      !institution.trim() ||
+      !course.trim()
+    ) {
+      return setValidationError(
+        'Please fill in all required contact and academic fields marked with an asterisk (*).'
+      );
     }
 
     if (skills.length === 0) {
@@ -111,44 +146,136 @@ const Apply: React.FC = () => {
     }
 
     if (!whyJoin.trim() || !projectIdea.trim()) {
-      return setValidationError('Please share what you want to learn/build and the problem statements that interest you.');
+      return setValidationError(
+        'Please share what you want to learn/build and the problem statements that interest you.'
+      );
     }
 
     if (!agreeRespect || !agreeAntiLeak || !agreeVerification || !agreeAccuracy) {
-      return setValidationError('Please review and confirm all four community agreement checkpoints before submitting.');
+      return setValidationError(
+        'Please review and confirm all four community agreement checkpoints before submitting.'
+      );
     }
 
-    const randomId = `VE-${Math.floor(1000 + Math.random() * 9000)}`;
-    setAssignedId(randomId);
+    setIsSubmitting(true);
 
-    // Save submission locally for persistence
+    const submissionId = `PUB-${Date.now()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+    const createdAt = new Date().toISOString();
+    const submittedDate = createdAt.slice(0, 10);
+    const trimmedPortfolio = portfolioUrl.trim();
+
+    // Direct Normalized Record for VIC Internal Administration System (Members -> Applications)
+    const internalRecord = {
+      submissionId,
+      id: submissionId,
+      applicantName: fullName.trim(),
+      fullName: fullName.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+      whatsapp: phone.trim(),
+      age: calculateAgeFromDob(dob),
+      dob,
+      city: city.trim(),
+      institution: institution.trim(),
+      course: course.trim(),
+      year: yearSemester.trim() || '1st Year',
+      yearSemester: yearSemester.trim() || '1st Year',
+      preferredDivision: primaryDivision,
+      primaryDivision,
+      roleAppliedFor: roleAppliedFor || 'Team Member',
+      skills,
+      interests: secondaryInterests.length > 0 ? secondaryInterests : [primaryDivision],
+      secondaryInterests,
+      motivation: whyJoin.trim(),
+      whyJoin: whyJoin.trim(),
+      experience: `Location: ${city.trim()} | Course: ${course.trim()} (${yearSemester.trim() || 'Student'})`,
+      projects: projectIdea.trim(),
+      projectIdea: projectIdea.trim(),
+      portfolioUrl: trimmedPortfolio,
+      githubUrl: trimmedPortfolio.includes('github.com') ? trimmedPortfolio : '',
+      linkedinUrl: trimmedPortfolio.includes('linkedin.com') ? trimmedPortfolio : '',
+      submittedDate,
+      submittedAt: createdAt,
+      createdAt,
+      status: 'Pending',
+    };
+
+    // 1. Save to localStorage queues for instant local & same-origin sync with Internal Administration
     try {
-      const newApplication = {
-        id: randomId,
-        fullName,
-        dob,
-        email,
-        phone,
-        city,
-        institution,
-        course,
-        yearSemester,
-        primaryDivision,
-        secondaryInterests,
-        skills,
-        whyJoin,
-        projectIdea,
-        portfolioUrl,
-        submittedAt: new Date().toISOString(),
-        status: 'Pending Review'
-      };
-      const existing = JSON.parse(localStorage.getItem('voltedge_applications') || '[]');
-      existing.push(newApplication);
-      localStorage.setItem('voltedge_applications', JSON.stringify(existing));
+      const pubQueueRaw = localStorage.getItem('vic_public_submitted_applications_v1');
+      const pubQueue = pubQueueRaw ? JSON.parse(pubQueueRaw) : [];
+      const filteredPub = Array.isArray(pubQueue)
+        ? pubQueue.filter(
+            (a: any) => (a.email || '').toLowerCase() !== internalRecord.email.toLowerCase()
+          )
+        : [];
+      localStorage.setItem(
+        'vic_public_submitted_applications_v1',
+        JSON.stringify([internalRecord, ...filteredPub])
+      );
+
+      const veQueueRaw = localStorage.getItem('voltedge_applications');
+      const veQueue = veQueueRaw ? JSON.parse(veQueueRaw) : [];
+      const filteredVe = Array.isArray(veQueue)
+        ? veQueue.filter(
+            (a: any) => (a.email || '').toLowerCase() !== internalRecord.email.toLowerCase()
+          )
+        : [];
+      localStorage.setItem(
+        'voltedge_applications',
+        JSON.stringify([internalRecord, ...filteredVe])
+      );
+
+      if ('BroadcastChannel' in window) {
+        const bc1 = new BroadcastChannel('vic_public_applications_channel');
+        bc1.postMessage({
+          type: 'NEW_PUBLIC_APPLICATION',
+          application: internalRecord,
+          record: internalRecord,
+        });
+        bc1.close();
+
+        const bc2 = new BroadcastChannel('vic_applications_sync_v1');
+        bc2.postMessage({
+          type: 'NEW_PUBLIC_APPLICATION',
+          application: internalRecord,
+          record: internalRecord,
+        });
+        bc2.close();
+      }
     } catch {
-      // ignore storage quota error
+      // ignore local storage errors
     }
 
+    // 2. Send to Cloudflare Pages Function (/api/applications) so D1/KV stores it directly for Internal Admin
+    try {
+      const apiEndpoints = ['/api/applications'];
+      const customApiBase = (import.meta as any).env?.VITE_ADMIN_API_URL;
+      if (customApiBase) {
+        apiEndpoints.unshift(`${String(customApiBase).replace(/\/$/, '')}/api/applications`);
+      }
+
+      for (const endpoint of apiEndpoints) {
+        try {
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(internalRecord),
+          });
+          if (res.ok) {
+            break;
+          }
+        } catch {
+          // continue to fallback endpoint
+        }
+      }
+    } catch {
+      // offline fallback already saved
+    } finally {
+      setIsSubmitting(false);
+    }
+
+    setAssignedId(submissionId);
     setIsSubmitted(true);
     window.scrollTo({ top: 80, behavior: 'smooth' });
   };
@@ -159,7 +286,6 @@ const Apply: React.FC = () => {
       <section className="relative py-8 sm:py-12 md:py-16 bg-white dark:bg-[#0A0A0C] border-b border-neutral-200 dark:border-neutral-800">
         <div className="container-custom max-w-3xl mx-auto px-4 sm:px-6 space-y-4">
           <ScrollAnimationWrapper>
-            {/* Top Left "Back" button */}
             <div className="flex items-center justify-start">
               <Link
                 to="/join"
@@ -172,7 +298,7 @@ const Apply: React.FC = () => {
 
             <div className="text-center space-y-3">
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-amber-500/10 dark:bg-volt-gold/15 text-amber-700 dark:text-volt-gold border border-amber-500/30 dark:border-volt-gold/30 text-xs font-mono font-bold select-none">
-                <span>OFFICIAL APPLICATION FORM</span>
+                <span>OFFICIAL VIC APPLICATION FORM</span>
               </div>
 
               <h1 className="text-2xl sm:text-4xl md:text-5xl font-black font-display text-neutral-900 dark:text-white uppercase tracking-tight">
@@ -180,7 +306,7 @@ const Apply: React.FC = () => {
               </h1>
 
               <p className="text-xs sm:text-sm md:text-base text-neutral-600 dark:text-neutral-300 max-w-xl mx-auto leading-relaxed">
-                Complete your application to be verified for access to our private WhatsApp and Discord community channels.
+                Submit your membership application directly to the VoltEdge Innovation Community (VIC) internal administration system.
               </p>
             </div>
           </ScrollAnimationWrapper>
@@ -199,13 +325,13 @@ const Apply: React.FC = () => {
 
                 <div className="space-y-2">
                   <span className="text-xs font-mono font-bold text-amber-600 dark:text-volt-gold tracking-widest uppercase">
-                    Application Received
+                    Application Sent to VIC Administration
                   </span>
                   <h2 className="text-xl sm:text-3xl font-black font-display text-neutral-900 dark:text-white">
                     Thank You, {fullName}!
                   </h2>
                   <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 max-w-md mx-auto leading-relaxed">
-                    Your membership application has been recorded in our verification pipeline.
+                    Your membership application has been transmitted directly to the VIC Internal Administration portal for review.
                   </p>
                 </div>
 
@@ -213,7 +339,7 @@ const Apply: React.FC = () => {
                   <span className="text-[11px] font-mono text-neutral-500 dark:text-neutral-400 uppercase font-semibold">
                     Application Reference ID
                   </span>
-                  <div className="text-xl sm:text-2xl font-mono font-black text-amber-600 dark:text-volt-gold tracking-wider">
+                  <div className="text-lg sm:text-xl font-mono font-black text-amber-600 dark:text-volt-gold tracking-wider">
                     {assignedId}
                   </div>
                 </div>
@@ -223,9 +349,9 @@ const Apply: React.FC = () => {
                     <span>What Happens Next:</span>
                   </div>
                   <ul className="list-disc list-inside space-y-1.5 text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm">
-                    <li>The VoltEdge coordination team will review your background and goals.</li>
-                    <li>If approved, an official welcome email will be sent to <strong className="text-neutral-900 dark:text-white underline">{email}</strong>.</li>
-                    <li>The email contains direct invite links to join our private <strong>WhatsApp Community</strong> and <strong>Discord Server</strong>.</li>
+                    <li>The VIC Administration Board will review your application under <strong>Members → Applications</strong>.</li>
+                    <li>Once approved, you will be inducted with an official Member ID (e.g., <strong>VIC-M007</strong>) and assigned to your division.</li>
+                    <li>Official onboarding details will be sent to <strong className="text-neutral-900 dark:text-white underline">{email}</strong>.</li>
                   </ul>
                 </div>
 
@@ -253,7 +379,7 @@ const Apply: React.FC = () => {
                   </div>
                 )}
 
-                {/* Section A: Personal & Contact */}
+                {/* Section 1: Personal & Contact */}
                 <CardComponent className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-5 bg-white dark:bg-[#0E0E11] border border-neutral-200 dark:border-neutral-800 shadow-sm">
                   <div className="border-b border-neutral-200 dark:border-neutral-800 pb-3">
                     <div className="flex items-center gap-2">
@@ -265,7 +391,7 @@ const Apply: React.FC = () => {
                       </h3>
                     </div>
                     <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 pl-8">
-                      Your identity and contact information for community verification.
+                      Your identity and contact information for membership verification.
                     </p>
                   </div>
 
@@ -279,14 +405,14 @@ const Apply: React.FC = () => {
                         required
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        placeholder="e.g. Abdullah Saami Sada"
+                        placeholder="e.g. Abdullah Saami"
                         className="input-field"
                       />
                     </div>
 
                     <div className="space-y-1.5">
                       <label className="block text-xs sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                        Date of Birth (Calendar Selection)
+                        Date of Birth
                       </label>
                       <input
                         type="date"
@@ -295,7 +421,6 @@ const Apply: React.FC = () => {
                         max="2012-12-31"
                         min="1995-01-01"
                         className="input-field cursor-pointer"
-                        title="Choose your date of birth from calendar"
                       />
                     </div>
 
@@ -308,7 +433,7 @@ const Apply: React.FC = () => {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="e.g. saami@example.com"
+                        placeholder="e.g. student@example.com"
                         className="input-field"
                       />
                     </div>
@@ -343,7 +468,7 @@ const Apply: React.FC = () => {
                   </div>
                 </CardComponent>
 
-                {/* Section B: Academic Background */}
+                {/* Section 2: Academic Background */}
                 <CardComponent className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-5 bg-white dark:bg-[#0E0E11] border border-neutral-200 dark:border-neutral-800 shadow-sm">
                   <div className="border-b border-neutral-200 dark:border-neutral-800 pb-3">
                     <div className="flex items-center gap-2">
@@ -355,7 +480,7 @@ const Apply: React.FC = () => {
                       </h3>
                     </div>
                     <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 pl-8">
-                      Where you study and your current academic stream.
+                      Your institution and current academic program.
                     </p>
                   </div>
 
@@ -383,7 +508,7 @@ const Apply: React.FC = () => {
                         required
                         value={course}
                         onChange={(e) => setCourse(e.target.value)}
-                        placeholder="e.g. Artificial Intelligence & Data Science"
+                        placeholder="e.g. B.E. Computer Science / Electronics"
                         className="input-field"
                       />
                     </div>
@@ -396,14 +521,14 @@ const Apply: React.FC = () => {
                         type="text"
                         value={yearSemester}
                         onChange={(e) => setYearSemester(e.target.value)}
-                        placeholder="e.g. 1st Year / Semester II"
+                        placeholder="e.g. 2nd Year"
                         className="input-field"
                       />
                     </div>
                   </div>
                 </CardComponent>
 
-                {/* Section C: Track & Skills with Custom Skill Input Box */}
+                {/* Section 3: Division, Role & Skills */}
                 <CardComponent className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-5 bg-white dark:bg-[#0E0E11] border border-neutral-200 dark:border-neutral-800 shadow-sm">
                   <div className="border-b border-neutral-200 dark:border-neutral-800 pb-3">
                     <div className="flex items-center gap-2">
@@ -411,44 +536,72 @@ const Apply: React.FC = () => {
                         3
                       </span>
                       <h3 className="text-base sm:text-lg font-bold font-display text-neutral-900 dark:text-white">
-                        Track &amp; Skills
+                        Division, Role &amp; Technical Skills
                       </h3>
                     </div>
                     <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 pl-8">
-                      Choose your primary division, select skills, or type your own custom tools to add them.
+                      Select your preferred VIC division, role, and technical skills.
                     </p>
                   </div>
 
                   <div className="space-y-4">
-                    <div className="space-y-1.5">
-                      <label className="block text-xs sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                        Primary Division of Interest <span className="text-amber-500 font-bold">*</span>
-                      </label>
-                      <div className="relative">
-                        <select
-                          value={primaryDivision}
-                          onChange={(e) => setPrimaryDivision(e.target.value as DivisionType)}
-                          className="input-field appearance-none cursor-pointer pr-10"
-                        >
-                          {DIVISIONS_LIST.map((div) => (
-                            <option 
-                              key={div} 
-                              value={div}
-                              className="bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white py-2"
-                            >
-                              {div}
-                            </option>
-                          ))}
-                        </select>
-                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-neutral-500 dark:text-neutral-400">
-                          <ChevronDown size={16} />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+                      <div className="space-y-1.5">
+                        <label className="block text-xs sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                          Preferred Division <span className="text-amber-500 font-bold">*</span>
+                        </label>
+                        <div className="relative">
+                          <select
+                            value={primaryDivision}
+                            onChange={(e) => setPrimaryDivision(e.target.value as DivisionType)}
+                            className="input-field appearance-none cursor-pointer pr-10"
+                          >
+                            {DIVISIONS_LIST.map((div) => (
+                              <option
+                                key={div}
+                                value={div}
+                                className="bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white py-2"
+                              >
+                                {div}
+                              </option>
+                            ))}
+                          </select>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-neutral-500 dark:text-neutral-400">
+                            <ChevronDown size={16} />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="block text-xs sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                          Role Applied For <span className="text-amber-500 font-bold">*</span>
+                        </label>
+                        <div className="relative">
+                          <select
+                            value={roleAppliedFor}
+                            onChange={(e) => setRoleAppliedFor(e.target.value)}
+                            className="input-field appearance-none cursor-pointer pr-10"
+                          >
+                            {ROLES_LIST.map((role) => (
+                              <option
+                                key={role}
+                                value={role}
+                                className="bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white py-2"
+                              >
+                                {role}
+                              </option>
+                            ))}
+                          </select>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-neutral-500 dark:text-neutral-400">
+                            <ChevronDown size={16} />
+                          </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="space-y-2 pt-1">
                       <label className="block text-xs sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                        Secondary Interests
+                        Secondary Division Interests
                       </label>
                       <div className="flex flex-wrap gap-2">
                         {DIVISIONS_LIST.filter((d) => d !== primaryDivision).map((div) => {
@@ -502,7 +655,7 @@ const Apply: React.FC = () => {
                     {/* Custom Skill Adder Input Box */}
                     <div className="p-3.5 sm:p-4 rounded-2xl bg-neutral-50 dark:bg-neutral-900/70 border border-neutral-200 dark:border-neutral-800 space-y-3">
                       <label className="block text-xs sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                        Add More Custom Skills or Tools
+                        Add Custom Skills or Tools
                       </label>
                       <div className="flex items-center gap-2">
                         <input
@@ -528,29 +681,30 @@ const Apply: React.FC = () => {
                         </button>
                       </div>
 
-                      {/* Display Custom Added Skills as Pill Badges with Remove Button */}
                       {skills.filter((s) => !PREDEFINED_SKILLS.includes(s)).length > 0 && (
                         <div className="pt-1">
                           <span className="text-[11px] font-mono text-neutral-500 uppercase block mb-1.5">
                             Custom Added Skills:
                           </span>
                           <div className="flex flex-wrap gap-1.5">
-                            {skills.filter((s) => !PREDEFINED_SKILLS.includes(s)).map((cSkill) => (
-                              <span
-                                key={cSkill}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-volt-gold/15 text-amber-700 dark:text-volt-gold border border-volt-gold/40 text-xs font-semibold"
-                              >
-                                <span>{cSkill}</span>
-                                <button
-                                  type="button"
-                                  onClick={() => handleRemoveSkill(cSkill)}
-                                  className="text-amber-700 dark:text-volt-gold hover:text-red-500 p-0.5"
-                                  title="Remove skill"
+                            {skills
+                              .filter((s) => !PREDEFINED_SKILLS.includes(s))
+                              .map((cSkill) => (
+                                <span
+                                  key={cSkill}
+                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-volt-gold/15 text-amber-700 dark:text-volt-gold border border-volt-gold/40 text-xs font-semibold"
                                 >
-                                  <X size={13} />
-                                </button>
-                              </span>
-                            ))}
+                                  <span>{cSkill}</span>
+                                  <button
+                                    type="button"
+                                    onClick={() => handleRemoveSkill(cSkill)}
+                                    className="text-amber-700 dark:text-volt-gold hover:text-red-500 p-0.5"
+                                    title="Remove skill"
+                                  >
+                                    <X size={13} />
+                                  </button>
+                                </span>
+                              ))}
                           </div>
                         </div>
                       )}
@@ -558,7 +712,7 @@ const Apply: React.FC = () => {
                   </div>
                 </CardComponent>
 
-                {/* Section D: Goals & Project Interests (No "Motivation" wording) */}
+                {/* Section 4: Goals & Project Interests */}
                 <CardComponent className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-5 bg-white dark:bg-[#0E0E11] border border-neutral-200 dark:border-neutral-800 shadow-sm">
                   <div className="border-b border-neutral-200 dark:border-neutral-800 pb-3">
                     <div className="flex items-center gap-2">
@@ -570,7 +724,7 @@ const Apply: React.FC = () => {
                       </h3>
                     </div>
                     <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 pl-8">
-                      Tell us what you want to build, learn, or solve with fellow community members.
+                      Tell us what you want to build, learn, or contribute to within VoltEdge.
                     </p>
                   </div>
 
@@ -584,14 +738,14 @@ const Apply: React.FC = () => {
                         required
                         value={whyJoin}
                         onChange={(e) => setWhyJoin(e.target.value)}
-                        placeholder="e.g. Looking to collaborate with fellow creators across robotics, web applications, and embedded electronics, form project squads, and represent the community in technical competitions."
+                        placeholder="e.g. Looking to collaborate with fellow creators across robotics, web applications, and embedded electronics, join project teams, and represent the community in technical competitions."
                         className="input-field resize-y min-h-[90px] leading-relaxed"
                       />
                     </div>
 
                     <div className="space-y-1.5">
                       <label className="block text-xs sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                        Problem Statements or Solutions You Want to Work On <span className="text-amber-500 font-bold">*</span>
+                        Problem Statements or Projects You Want to Work On <span className="text-amber-500 font-bold">*</span>
                       </label>
                       <textarea
                         rows={3}
@@ -611,14 +765,14 @@ const Apply: React.FC = () => {
                         type="url"
                         value={portfolioUrl}
                         onChange={(e) => setPortfolioUrl(e.target.value)}
-                        placeholder="e.g. https://github.com/saamisada"
+                        placeholder="e.g. https://github.com/username"
                         className="input-field"
                       />
                     </div>
                   </div>
                 </CardComponent>
 
-                {/* Section E: Genuine Student Agreement Checkpoints */}
+                {/* Section 5: Genuine Student Agreement Checkpoints */}
                 <CardComponent className="p-4 sm:p-6 md:p-8 space-y-4 bg-white dark:bg-[#0E0E11] border-2 border-amber-500/50 dark:border-volt-gold/50 shadow-sm">
                   <div className="border-b border-neutral-200 dark:border-neutral-800 pb-3">
                     <div className="flex items-center gap-2">
@@ -628,13 +782,12 @@ const Apply: React.FC = () => {
                       </h3>
                     </div>
                     <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
-                      Please read and confirm our genuine student community expectations. Tap each box to agree.
+                      Please read and confirm our community expectations. Tap each box to agree.
                     </p>
                   </div>
 
                   <div className="space-y-3 pt-1">
-                    {/* Checkpoint 1 */}
-                    <div 
+                    <div
                       onClick={() => setAgreeRespect(!agreeRespect)}
                       className={`p-3.5 sm:p-4 rounded-xl border transition-all cursor-pointer flex items-start gap-3 select-none ${
                         agreeRespect
@@ -654,13 +807,12 @@ const Apply: React.FC = () => {
                           Peer Respect &amp; Integrity
                         </strong>
                         <span className="text-neutral-700 dark:text-neutral-300">
-                          I understand VoltEdge is a peer-to-peer student community and I agree to collaborate respectfully with fellow members.
+                          I understand VoltEdge is a collaborative student community and I agree to work respectfully with fellow members.
                         </span>
                       </div>
                     </div>
 
-                    {/* Checkpoint 2 */}
-                    <div 
+                    <div
                       onClick={() => setAgreeAntiLeak(!agreeAntiLeak)}
                       className={`p-3.5 sm:p-4 rounded-xl border transition-all cursor-pointer flex items-start gap-3 select-none ${
                         agreeAntiLeak
@@ -677,16 +829,15 @@ const Apply: React.FC = () => {
                       />
                       <div className="text-xs sm:text-sm leading-relaxed">
                         <strong className="text-neutral-900 dark:text-white font-bold block mb-0.5">
-                          Confidentiality &amp; Anti-Leak
+                          Confidentiality &amp; Documentation Standards
                         </strong>
                         <span className="text-neutral-700 dark:text-neutral-300">
-                          I agree not to leak internal project blueprints, proprietary code, or private squad discussions outside community channels.
+                          I agree to respect internal project documentation, repositories, and community guidelines.
                         </span>
                       </div>
                     </div>
 
-                    {/* Checkpoint 3 */}
-                    <div 
+                    <div
                       onClick={() => setAgreeVerification(!agreeVerification)}
                       className={`p-3.5 sm:p-4 rounded-xl border transition-all cursor-pointer flex items-start gap-3 select-none ${
                         agreeVerification
@@ -703,16 +854,15 @@ const Apply: React.FC = () => {
                       />
                       <div className="text-xs sm:text-sm leading-relaxed">
                         <strong className="text-neutral-900 dark:text-white font-bold block mb-0.5">
-                          Verification Process
+                          Administrative Review &amp; Induction
                         </strong>
                         <span className="text-neutral-700 dark:text-neutral-300">
-                          I understand that submitting this application initiates a review process, and official private invite links are granted upon verification.
+                          I understand that submitting this application sends my details to the VIC Administration Board for review and formal member induction.
                         </span>
                       </div>
                     </div>
 
-                    {/* Checkpoint 4 */}
-                    <div 
+                    <div
                       onClick={() => setAgreeAccuracy(!agreeAccuracy)}
                       className={`p-3.5 sm:p-4 rounded-xl border transition-all cursor-pointer flex items-start gap-3 select-none ${
                         agreeAccuracy
@@ -743,13 +893,18 @@ const Apply: React.FC = () => {
                 <div className="pt-3 pb-8 text-center space-y-3">
                   <button
                     type="submit"
+                    disabled={isSubmitting}
                     className="btn btn-primary text-sm sm:text-base font-mono font-bold px-8 py-4 sm:px-10 sm:py-4 shadow-xl w-full sm:w-auto inline-flex items-center justify-center gap-2 min-h-[52px]"
                   >
-                    <span>Submit Membership Application</span>
+                    <span>
+                      {isSubmitting
+                        ? 'Submitting to VIC Administration...'
+                        : 'Submit Membership Application'}
+                    </span>
                     <Send size={16} />
                   </button>
                   <p className="text-xs font-mono text-neutral-500 dark:text-neutral-400">
-                    Submissions are reviewed exclusively by the VoltEdge coordination team.
+                    Applications are delivered directly to the VIC Internal Administration system.
                   </p>
                 </div>
               </form>
@@ -762,4 +917,3 @@ const Apply: React.FC = () => {
 };
 
 export default Apply;
-
